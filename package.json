@@ -1,0 +1,20 @@
+{
+  "name": "fe-start",
+  "version": "0.0.1",
+  "description": "front end start up framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denvey/fe-start.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/denvey/fe-start/issues"
+  },
+  "homepage": "https://github.com/denvey/fe-start#readme"
+}
