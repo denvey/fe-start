@@ -13,8 +13,8 @@ gulp.task('clean', () => {
 
 // run webpack pack
 gulp.task('webpack', ['clean'], (done) => {
-    let webpackConf = require('./devServer/webpack.config');
-    webpack(webpackConf({debug: false}), (err, stats) => {
+    let webpackConf = require('./webpack/webpack.config');
+    webpack(webpackConf, (err, stats) => {
         if (err) throw new gutil.PluginError('webpack', err);
         gutil.log('[webpack]', stats.toString({colors: true}));
         done()
