@@ -60,7 +60,7 @@ let config = {
                         optimizationLevel: 3, pngquant:{quality: "65-80", speed: 4}}',
                     // url-loader更好用，小于10KB的图片会自动转成dataUrl，
                     // 否则则调用file-loader，参数直接传入
-                    'url?limit=10000&name=img/[name].[ext]'
+                    'url?limit=10000&name=[path][name].[ext]'
                 ]
             },
             {
