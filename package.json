@@ -4,7 +4,13 @@
   "description": "front end start up framework",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node server",
+    "build": "gulp",
+    "start-release": "node server/app production",
+    "deploy": "gulp deploy"
+  },
+  "localServer": {
+    "port": 3010
   },
   "repository": {
     "type": "git",
@@ -16,5 +22,49 @@
   "bugs": {
     "url": "https://github.com/denvey/fe-start/issues"
   },
-  "homepage": "https://github.com/denvey/fe-start#readme"
+  "homepage": "https://github.com/denvey/fe-start#readme",
+  "devDependencies": {
+    "babel-core": "^6.5.2",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "css-loader": "^0.15.6",
+    "eslint": "^2.3.0",
+    "express": "^4.13.4",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "file-loader": "^0.8.4",
+    "glob": "^6.0.4",
+    "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-htmlmin": "^1.1.3",
+    "gulp-replace": "^0.5.3",
+    "gulp-util": "^3.0.6",
+    "handlebars-loader": "^1.1.4",
+    "html-webpack-plugin": "^2.7.2",
+    "image-webpack-loader": "^1.6.1",
+    "jsx-loader": "^0.13.2",
+    "koa": "^0.21.0",
+    "koa-ejs": "^3.0.0",
+    "koa-proxy": "^0.3.0",
+    "koa-rewrite": "1.1.0",
+    "koa-router": "^5.1.2",
+    "koa-static": "^1.4.9",
+    "koa-webpack-dev-middleware": "^1.0.1",
+    "less": "^2.5.3",
+    "less-loader": "^2.2.1",
+    "lodash": "^3.10.0",
+    "node-libs-browser": "^0.5.2",
+    "open": "0.0.5",
+    "style-loader": "^0.12.3",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.10.5",
+    "webpack-dev-server": "^1.10.1",
+    "webpack-hot-middleware": "^2.9.1",
+    "webpack-stream": "^3.1.0"
+  },
+  "dependencies": {
+    "handlebars": "^4.0.5",
+    "jquery": "^2.2.1"
+  }
 }
