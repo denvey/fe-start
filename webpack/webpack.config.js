@@ -8,6 +8,7 @@ var path = require('path'),
 
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
+let PathRewriterPlugin = require('webpack-path-rewriter');
 
 let UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
@@ -88,6 +89,7 @@ let config = {
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
+        new PathRewriterPlugin()
         /*new ExtractTextPlugin('[name].css', {
             // 当allChunks指定为false时，css loader必须指定怎么处理
             // additional chunk所依赖的css，即指定`ExtractTextPlugin.extract()`

@@ -42,7 +42,7 @@ module.exports = function(router, app, staticDir) {
     render(app, {
         root: path.join(__dirname, 'src/views'),
         layout: '../common/components/layout/layout',
-        viewExt: 'html',
+        viewExt: 'hbs',
         cache: false,
         debug: true
     });
