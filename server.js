@@ -55,7 +55,7 @@ app.use(function*(next) {
 
 // logger
 app.use(function*(next) {
-    //console.log(this.method.info, this.url)
+    console.log(this.method.info, this.url)
     yield next
 });
 

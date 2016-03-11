@@ -11,14 +11,13 @@ let HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
-let PathRewriterPlugin = require('webpack-path-rewriter');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const debug = false;
 
 let srcDir = path.resolve(process.cwd(), 'src'),
-    assets = 'dist/',
-    jsDir = path.resolve(srcDir, 'views'),
-    publicPath = '';
+    assets = 'dist/views/',
+    publicPath = 'views/';
 
 let pathMap = require('../src/configs/pathMap.json');
 
@@ -30,6 +29,7 @@ let entries = (() => {
     });
     return entry;
 })();
+console.log(path.join(process.cwd(), assets));
 let chunks = Object.keys(entries);
 let config = {
     entry: entries,
@@ -59,7 +59,7 @@ let config = {
                         optimizationLevel: 3, pngquant:{quality: "65-80", speed: 4}}',
                     // url-loader更好用，小于10KB的图片会自动转成dataUrl，
                     // 否则则调用file-loader，参数直接传入
-                    'url?limit=10000&name=./img/[name].[ext]'
+                    'url?limit=10000&name=[1]&regExp=src/views/(.*)'
                 ]
             },
             {
@@ -87,14 +87,13 @@ let config = {
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-        new PathRewriterPlugin(),
         new ExtractTextPlugin('[name]-[hash:8].css', {
          // 当allChunks指定为false时，css loader必须指定怎么处理
          // additional chunk所依赖的css，即指定`ExtractTextPlugin.extract()`
          // 第一个参数`notExtractLoader`，一般是使用style-loader
          // @see https://github.com/webpack/extract-text-webpack-plugin
             allChunks: false
-         })
+        })
     ],
 
     devServer: {

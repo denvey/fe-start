@@ -48,7 +48,7 @@ module.exports = function(router, app, staticDir) {
     });
 
     router.get('/demo10', function*() {
-        yield this.render('demo1/index');
+        yield this.render('demo1/index',{staticPath:'/demo1'});
     });
     router.get('/demo/1', function*() {
         yield this.render('demo1/index');

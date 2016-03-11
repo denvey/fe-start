@@ -16,9 +16,9 @@ let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const debug = process.env.NODE_ENV !== 'production';
 
 let srcDir = path.resolve(process.cwd(), 'src'),
-    assets = 'dist/',
+    assets = 'dist/views',
     jsDir = path.resolve(srcDir, 'views'),
-    publicPath = '';
+    publicPath = '/views';
 
 let pathMap = require('../src/configs/pathMap.json');
 
@@ -61,7 +61,7 @@ let config = {
                         optimizationLevel: 3, pngquant:{quality: "65-80", speed: 4}}',
                     // url-loader更好用，小于10KB的图片会自动转成dataUrl，
                     // 否则则调用file-loader，参数直接传入
-                    'url?limit=10000&name=[path][name].[ext]'
+                    'url?limit=10000&name=[1]&regExp=src/views(.*)'
                 ]
             },
             {
@@ -103,7 +103,7 @@ let config = {
         hot: true,
         noInfo: false,
         inline: true,
-        publicPath: publicPath,
+        publicPath: 'dist/',
         stats: {
             cached: false,
             colors: true
