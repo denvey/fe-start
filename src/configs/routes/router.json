@@ -1,1 +1,4 @@
-router.json
+{
+  "/demo10": "/demo1",
+  "/demoTest": "/demo"
+}

@@ -1,1 +1,3 @@
-APIRouter.json
+{
+  "/API/demo1": "/list"
+}

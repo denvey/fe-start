@@ -8,7 +8,6 @@ var path = require('path'),
 
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
-let PathRewriterPlugin = require('webpack-path-rewriter');
 
 let UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
@@ -16,16 +15,22 @@ let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const debug = process.env.NODE_ENV !== 'production';
 
 let srcDir = path.resolve(process.cwd(), 'src'),
-    assets = 'dist/views',
-    jsDir = path.resolve(srcDir, 'views'),
-    publicPath = '/views';
+    assets = 'dist',
+    publicPath = '';
 
 let pathMap = require('../src/configs/pathMap.json');
+/*var entries = Object.keys(getEntry('src/views/!**!/!*.js', 'src/'));
+var entry = {};
+entries.forEach(function (name,i) {
+    console.log([name, i]);
+    entry[name] = [entries[i],'webpack-hot-middleware/client'];
+});
+return entry;*/
 
 let entries = (() => {
     var entry = {};
     glob.sync(srcDir + '/views/**/script.js').forEach(function (name) {
-        var n = name.slice(name.lastIndexOf('views/') + 6, name.length - 3);
+        var n = name.slice(name.lastIndexOf('src/') + 4, name.length - 3);
         entry[n] = [name,'webpack-hot-middleware/client'];
     });
     return entry;
@@ -35,7 +40,7 @@ let config = {
     entry: entries,
 
     output: {
-        path: path.join(process.cwd(), assets),
+        path: path.resolve(assets),
         filename: debug ? '[name].js' : '[name]-[chunkhash:8].min.js',
         chunkFilename: debug ? '[chunkhash:8].chunk.js' : '[chunkhash:8].chunk.min.js',
         hotUpdateChunkFilename: debug ? '[id].js' : '[id].[chunkhash:8].min.js',
@@ -61,7 +66,7 @@ let config = {
                         optimizationLevel: 3, pngquant:{quality: "65-80", speed: 4}}',
                     // url-loader更好用，小于10KB的图片会自动转成dataUrl，
                     // 否则则调用file-loader，参数直接传入
-                    'url?limit=10000&name=[1]&regExp=src/views(.*)'
+                    'url?limit=10000&name=[1]&regExp=src/(.*)'
                 ]
             },
             {
@@ -80,7 +85,7 @@ let config = {
         new CommonsChunkPlugin({
             name: 'vendor',
             chunks: chunks,
-            minChunks: chunks.length // 提取所有entry共同依赖的模块
+            minChunks: Infinity // 提取所有entry共同依赖的模块
         }),
         new webpack.ProvidePlugin({
             jQuery: "jquery",
@@ -88,8 +93,8 @@ let config = {
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
-        new PathRewriterPlugin()
+        new webpack.NoErrorsPlugin()
+        //new PathRewriterPlugin()
         /*new ExtractTextPlugin('[name].css', {
             // 当allChunks指定为false时，css loader必须指定怎么处理
             // additional chunk所依赖的css，即指定`ExtractTextPlugin.extract()`
@@ -103,7 +108,7 @@ let config = {
         hot: true,
         noInfo: false,
         inline: true,
-        publicPath: 'dist/',
+        publicPath: publicPath,
         stats: {
             cached: false,
             colors: true

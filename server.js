@@ -17,7 +17,7 @@ let pkg = require('./package.json');
 let env = process.argv[2] || process.env.NODE_ENV;
 let debug = 'production' !== env;
 let viewDir = debug ? 'src' : 'assets';
-let staticDir = path.resolve(__dirname, (debug ? 'src' : 'dist'));
+let staticDir = path.resolve(__dirname, '../' + (debug ? 'src' : 'dist'));
 // load routes
 let routes = require('./routes');
 
@@ -55,7 +55,7 @@ app.use(function*(next) {
 
 // logger
 app.use(function*(next) {
-    console.log(this.method.info, this.url)
+    //console.log(this.method.info, this.url)
     yield next
 });
 
