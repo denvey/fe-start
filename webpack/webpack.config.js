@@ -11,21 +11,15 @@ let HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const debug = process.env.NODE_ENV !== 'production';
+const debug = gulp.env.NODE_ENV == 'production';
 
 let srcDir = path.resolve(process.cwd(), 'src'),
     assets = 'dist',
     publicPath = '';
 
 let pathMap = require('../src/configs/pathMap.json');
-/*var entries = Object.keys(getEntry('src/views/!**!/!*.js', 'src/'));
-var entry = {};
-entries.forEach(function (name,i) {
-    console.log([name, i]);
-    entry[name] = [entries[i],'webpack-hot-middleware/client'];
-});
-return entry;*/
 
 let entries = (() => {
     var entry = {};
@@ -135,10 +129,7 @@ pages.forEach(function(pathname) {
     config.plugins.push(new HtmlWebpackPlugin(conf));
 });
 
-
-
 module.exports = config;
-
 
 function getEntry(globPath, pathDir) {
     var files = glob.sync(globPath);

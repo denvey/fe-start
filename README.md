@@ -1,8 +1,7 @@
 # fe-start
-front end start up framework
 
 ### 介绍
-    基于gulp/webpack/ES6的前端框架,主要简化开发中的工作,开发者只需要编写逻辑代码
+    基于gulp/webpack/ES6的前端框架
 
 ### 技术栈
 - handlebarsjs[http://www.handlebarsjs.org/]
@@ -10,12 +9,14 @@ front end start up framework
 
 ### 开始
 1. `git clone project url`
-2. `npm install`
-3. `npm run dev`
+2. `cd project dir`
+3. `npm install`
+4. `npm run dev`
 
 
 ### 文件目录
 ```
+├── dist  // 生产环境静态资源打包目录
 ├── src
 │   ├── common
 │   │   ├── components   // 公共组件
@@ -59,3 +60,9 @@ front end start up framework
     └── webpack.prod.config.js
 
 ```
+
+### 前端单独开发
+- 配置路由(router.json)
+- API接口路由配置(APIRouter.json)
+
+### 使用MOCK系统
